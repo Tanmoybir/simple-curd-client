@@ -9,7 +9,22 @@ function App() {
     const email = form.email.value;
     const users = {name,email};
     console.log(users);
-    
+    fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers:{
+        'content-type': 'application/json'
+      },
+      body:JSON.stringify(users)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      if(data.insertedId) {
+        alert('User Added Successfully')
+        form.reset()
+      }
+    })
+
   }
 
   return (
